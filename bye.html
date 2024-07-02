@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互联网的尽头</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>抱歉，您已经到达互联网的尽头，这里没有更多的页面可供访问。</p>
+        <p>感谢您的访问！</p>
+        <p>接下来我们将下载整个互联网，请您耐心等待。</p>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="300"></canvas>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var frameIndex = 0;
+        var frames = [];
+
+        function loadFrames() {
+            var image = new Image();
+            image.src = "https://i.postimg.cc/9Wpjp3tc/downloadwww.gif";
+            image.onload = function() {
+                var frameWidth = image.width / numberOfFrames;
+                var frameHeight = image.height;
+
+                for (var i = 0; i < numberOfFrames; i++) {
+                    var frameX = i * frameWidth;
+                    frames.push({
+                        sourceImage: image,
+                        sourceX: frameX,
+                        sourceY: 0,
+                        sourceWidth: frameWidth,
+                        sourceHeight: frameHeight,
+                        targetX: 0,
+                        targetY: 0,
+                        targetWidth: canvas.width,
+                        targetHeight: canvas.height
+                    });
+                }
+
+                animate();
+            };
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(
+                frames[frameIndex].sourceImage,
+                frames[frameIndex].sourceX,
+                frames[frameIndex].sourceY,
+                frames[frameIndex].sourceWidth,
+                frames[frameIndex].sourceHeight,
+                frames[frameIndex].targetX,
+                frames[frameIndex].targetY,
+                frames[frameIndex].targetWidth,
+                frames[frameIndex].targetHeight
+            );
+
+            frameIndex++;
+            if (frameIndex >= frames.length) {
+                frameIndex = 0;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        loadFrames();
+    </script>
+</body>
+</html>
+    </div>
+</body>
+</html>
